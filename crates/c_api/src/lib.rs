@@ -16,6 +16,9 @@
 //! ### Note
 //! When enabeld, the public symbols prefixed with `wasmi_` are mangled as well, even if they should not, in principle,
 //! cause any duplicate symbol error when working with other implementers.
+//!
+//! ## The `prefix-symbols` feature
+//! Adds a `wasmi_` prefix to all the public symbols. Can't be used in combination with the `mangle-symbols` feature.
 
 #![no_std]
 #![allow(non_snake_case, non_camel_case_types, non_upper_case_globals)]
@@ -49,22 +52,7 @@ mod vec;
 
 use self::utils::*;
 pub use self::{
-    config::*,
-    engine::*,
-    error::*,
-    foreign::*,
-    frame::*,
-    func::*,
-    global::*,
-    instance::*,
-    memory::*,
-    module::*,
-    r#extern::*,
-    r#ref::*,
-    store::*,
-    table::*,
-    trap::*,
-    types::*,
-    val::*,
+    config::*, engine::*, error::*, foreign::*, frame::*, func::*, global::*, instance::*,
+    memory::*, module::*, r#extern::*, r#ref::*, store::*, table::*, trap::*, types::*, val::*,
     vec::*,
 };
