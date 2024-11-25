@@ -17,6 +17,7 @@
 //! When enabeld, the public symbols prefixed with `wasmi_` are mangled as well, even if they should not, in principle,
 //! cause any duplicate symbol error when working with other implementers.
 //!
+//!
 //! ## The `prefix-symbols` feature
 //! Adds a `wasmi_` prefix to all the public symbols. Can't be used in combination with the `mangle-symbols` feature.
 
@@ -56,3 +57,6 @@ pub use self::{
     memory::*, module::*, r#extern::*, r#ref::*, store::*, table::*, trap::*, types::*, val::*,
     vec::*,
 };
+
+#[cfg(all(feature = "mangle-symbols", feature = "prefix-symbols"))]
+compile_error!("Cannot use `mangle-symbols` and `prefix-symbols` features together!");

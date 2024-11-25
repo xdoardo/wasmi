@@ -1,12 +1,6 @@
 use crate::{
-    wasm_functype_t,
-    wasm_globaltype_t,
-    wasm_memorytype_t,
-    wasm_tabletype_t,
-    CFuncType,
-    CGlobalType,
-    CMemoryType,
-    CTableType,
+    wasm_functype_t, wasm_globaltype_t, wasm_memorytype_t, wasm_tabletype_t, CFuncType,
+    CGlobalType, CMemoryType, CTableType,
 };
 use wasmi::ExternType;
 
@@ -64,6 +58,7 @@ impl wasm_externtype_t {
 
 /// Returns the [`wasm_externkind_t`] of the [`wasm_externtype_t`].
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(feature = "prefix-symbols", export_name = "wasmi_wasm_externtype_kind")]
 pub extern "C" fn wasm_externtype_kind(et: &wasm_externtype_t) -> wasm_externkind_t {
     match &et.which {
         CExternType::Func(_) => wasm_externkind_t::WASM_EXTERN_FUNC,
@@ -75,6 +70,10 @@ pub extern "C" fn wasm_externtype_kind(et: &wasm_externtype_t) -> wasm_externkin
 
 /// Returns a mutable reference to the [`wasm_externtype_t`] as [`wasm_functype_t`].
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(
+    feature = "prefix-symbols",
+    export_name = "wasmi_wasm_externtype_as_functype"
+)]
 pub extern "C" fn wasm_externtype_as_functype(
     et: &mut wasm_externtype_t,
 ) -> Option<&mut wasm_functype_t> {
@@ -83,6 +82,10 @@ pub extern "C" fn wasm_externtype_as_functype(
 
 /// Returns a shared reference to the [`wasm_externtype_t`] as [`wasm_functype_t`].
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(
+    feature = "prefix-symbols",
+    export_name = "wasmi_wasm_externtype_as_functype_const"
+)]
 pub extern "C" fn wasm_externtype_as_functype_const(
     et: &wasm_externtype_t,
 ) -> Option<&wasm_functype_t> {
@@ -91,6 +94,10 @@ pub extern "C" fn wasm_externtype_as_functype_const(
 
 /// Returns a mutable reference to the [`wasm_externtype_t`] as [`wasm_globaltype_t`].
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(
+    feature = "prefix-symbols",
+    export_name = "wasmi_wasm_externtype_as_globaltype"
+)]
 pub extern "C" fn wasm_externtype_as_globaltype(
     et: &mut wasm_externtype_t,
 ) -> Option<&mut wasm_globaltype_t> {
@@ -99,6 +106,10 @@ pub extern "C" fn wasm_externtype_as_globaltype(
 
 /// Returns a shared reference to the [`wasm_externtype_t`] as [`wasm_globaltype_t`].
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(
+    feature = "prefix-symbols",
+    export_name = "wasmi_wasm_externtype_as_globaltype_const"
+)]
 pub extern "C" fn wasm_externtype_as_globaltype_const(
     et: &wasm_externtype_t,
 ) -> Option<&wasm_globaltype_t> {
@@ -107,6 +118,10 @@ pub extern "C" fn wasm_externtype_as_globaltype_const(
 
 /// Returns a mutable reference to the [`wasm_externtype_t`] as [`wasm_tabletype_t`].
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(
+    feature = "prefix-symbols",
+    export_name = "wasmi_wasm_externtype_as_tabletype"
+)]
 pub extern "C" fn wasm_externtype_as_tabletype(
     et: &mut wasm_externtype_t,
 ) -> Option<&mut wasm_tabletype_t> {
@@ -115,6 +130,10 @@ pub extern "C" fn wasm_externtype_as_tabletype(
 
 /// Returns a shared reference to the [`wasm_externtype_t`] as [`wasm_tabletype_t`].
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(
+    feature = "prefix-symbols",
+    export_name = "wasmi_wasm_externtype_as_tabletype_const"
+)]
 pub extern "C" fn wasm_externtype_as_tabletype_const(
     et: &wasm_externtype_t,
 ) -> Option<&wasm_tabletype_t> {
@@ -123,6 +142,10 @@ pub extern "C" fn wasm_externtype_as_tabletype_const(
 
 /// Returns a mutable reference to the [`wasm_externtype_t`] as [`wasm_memorytype_t`].
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(
+    feature = "prefix-symbols",
+    export_name = "wasmi_wasm_externtype_as_memorytype"
+)]
 pub extern "C" fn wasm_externtype_as_memorytype(
     et: &mut wasm_externtype_t,
 ) -> Option<&mut wasm_memorytype_t> {
@@ -131,6 +154,10 @@ pub extern "C" fn wasm_externtype_as_memorytype(
 
 /// Returns a shared reference to the [`wasm_externtype_t`] as [`wasm_memorytype_t`].
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(
+    feature = "prefix-symbols",
+    export_name = "wasmi_wasm_externtype_as_memorytype_const"
+)]
 pub extern "C" fn wasm_externtype_as_memorytype_const(
     et: &wasm_externtype_t,
 ) -> Option<&wasm_memorytype_t> {

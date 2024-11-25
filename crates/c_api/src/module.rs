@@ -1,11 +1,6 @@
 use crate::{
-    wasm_byte_vec_t,
-    wasm_exporttype_t,
-    wasm_exporttype_vec_t,
-    wasm_importtype_t,
-    wasm_importtype_vec_t,
-    wasm_store_t,
-    CExternType,
+    wasm_byte_vec_t, wasm_exporttype_t, wasm_exporttype_vec_t, wasm_importtype_t,
+    wasm_importtype_vec_t, wasm_store_t, CExternType,
 };
 use alloc::{boxed::Box, string::String};
 use wasmi::{Engine, Module};
@@ -50,6 +45,7 @@ wasmi_c_api_macros::declare_own!(wasm_shared_module_t);
 /// It is the caller's responsibility not to alias the [`wasm_module_t`]
 /// with its underlying, internal [`WasmStoreRef`](crate::WasmStoreRef).
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(feature = "prefix-symbols", export_name = "wasmi_wasm_module_new")]
 pub unsafe extern "C" fn wasm_module_new(
     store: &mut wasm_store_t,
     binary: &wasm_byte_vec_t,
@@ -69,6 +65,7 @@ pub unsafe extern "C" fn wasm_module_new(
 /// It is the caller's responsibility not to alias the [`wasm_module_t`]
 /// with its underlying, internal [`WasmStoreRef`](crate::WasmStoreRef).
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(feature = "prefix-symbols", export_name = "wasmi_wasm_module_validate")]
 pub unsafe extern "C" fn wasm_module_validate(
     store: &mut wasm_store_t,
     binary: &wasm_byte_vec_t,
@@ -96,6 +93,7 @@ fn fill_exports(module: &Module, out: &mut wasm_exporttype_vec_t) {
 ///
 /// Wraps [`Module::exports`].
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(feature = "prefix-symbols", export_name = "wasmi_wasm_module_exports")]
 pub extern "C" fn wasm_module_exports(module: &wasm_module_t, out: &mut wasm_exporttype_vec_t) {
     fill_exports(&module.inner, out);
 }
@@ -121,6 +119,7 @@ fn fill_imports(module: &Module, out: &mut wasm_importtype_vec_t) {
 ///
 /// Wraps [`Module::imports`].
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(feature = "prefix-symbols", export_name = "wasmi_wasm_module_imports")]
 pub extern "C" fn wasm_module_imports(module: &wasm_module_t, out: &mut wasm_importtype_vec_t) {
     fill_imports(&module.inner, out);
 }
@@ -132,6 +131,7 @@ pub extern "C" fn wasm_module_imports(module: &wasm_module_t, out: &mut wasm_imp
 ///
 /// Wraps [`Module::clone`] (kinda).
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(feature = "prefix-symbols", export_name = "wasmi_wasm_module_share")]
 pub extern "C" fn wasm_module_share(module: &wasm_module_t) -> Box<wasm_shared_module_t> {
     Box::new(wasm_shared_module_t {
         inner: module.inner.clone(),
@@ -149,6 +149,7 @@ pub extern "C" fn wasm_module_share(module: &wasm_module_t) -> Box<wasm_shared_m
 ///
 /// Wraps [`Module::clone`] (kinda).
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(feature = "prefix-symbols", export_name = "wasmi_wasm_module_obtain")]
 pub unsafe extern "C" fn wasm_module_obtain(
     store: &mut wasm_store_t,
     shared_module: &wasm_shared_module_t,
@@ -169,6 +170,10 @@ pub unsafe extern "C" fn wasm_module_obtain(
 ///
 /// This API is unsupported and will panic upon use.
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(
+    feature = "prefix-symbols",
+    export_name = "wasmi_wasm_module_serialize"
+)]
 pub extern "C" fn wasm_module_serialize(_module: &wasm_module_t, _ret: &mut wasm_byte_vec_t) {
     unimplemented!("wasm_module_serialize")
 }
@@ -188,6 +193,10 @@ pub extern "C" fn wasm_module_serialize(_module: &wasm_module_t, _ret: &mut wasm
 /// It is the caller's responsibility not to alias the [`wasm_module_t`]
 /// with its underlying, internal [`WasmStoreRef`](crate::WasmStoreRef).
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
+#[cfg_attr(
+    feature = "prefix-symbols",
+    export_name = "wasmi_wasm_module_deserialize"
+)]
 pub unsafe extern "C" fn wasm_module_deserialize(
     _store: &mut wasm_store_t,
     _binary: &wasm_byte_vec_t,
