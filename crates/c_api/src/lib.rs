@@ -53,8 +53,23 @@ mod vec;
 
 use self::utils::*;
 pub use self::{
-    config::*, engine::*, error::*, foreign::*, frame::*, func::*, global::*, instance::*,
-    memory::*, module::*, r#extern::*, r#ref::*, store::*, table::*, trap::*, types::*, val::*,
+    config::*,
+    engine::*,
+    error::*,
+    foreign::*,
+    frame::*,
+    func::*,
+    global::*,
+    instance::*,
+    memory::*,
+    module::*,
+    r#extern::*,
+    r#ref::*,
+    store::*,
+    table::*,
+    trap::*,
+    types::*,
+    val::*,
     vec::*,
 };
 

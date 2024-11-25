@@ -71,14 +71,20 @@ pub unsafe extern "C" fn wasm_global_new(
 
 /// Returns the [`wasm_global_t`] as mutable reference to [`wasm_extern_t`].
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
-#[cfg_attr(feature = "prefix-symbols", export_name = "wasmi_wasm_global_as_extern")]
+#[cfg_attr(
+    feature = "prefix-symbols",
+    export_name = "wasmi_wasm_global_as_extern"
+)]
 pub extern "C" fn wasm_global_as_extern(g: &mut wasm_global_t) -> &mut wasm_extern_t {
     &mut g.inner
 }
 
 /// Returns the [`wasm_global_t`] as shared reference to [`wasm_extern_t`].
 #[cfg_attr(not(feature = "mangle-symbols"), no_mangle)]
-#[cfg_attr(feature = "prefix-symbols", export_name = "wasmi_wasm_global_as_extern_const")]
+#[cfg_attr(
+    feature = "prefix-symbols",
+    export_name = "wasmi_wasm_global_as_extern_const"
+)]
 pub extern "C" fn wasm_global_as_extern_const(g: &wasm_global_t) -> &wasm_extern_t {
     &g.inner
 }

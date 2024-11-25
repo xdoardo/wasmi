@@ -1,6 +1,12 @@
 use crate::{
-    wasm_functype_t, wasm_globaltype_t, wasm_memorytype_t, wasm_tabletype_t, CFuncType,
-    CGlobalType, CMemoryType, CTableType,
+    wasm_functype_t,
+    wasm_globaltype_t,
+    wasm_memorytype_t,
+    wasm_tabletype_t,
+    CFuncType,
+    CGlobalType,
+    CMemoryType,
+    CTableType,
 };
 use wasmi::ExternType;
 
